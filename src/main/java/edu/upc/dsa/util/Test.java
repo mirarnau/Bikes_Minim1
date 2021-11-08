@@ -4,6 +4,7 @@ import edu.upc.dsa.models.Bike;
 import edu.upc.dsa.models.Station;
 import edu.upc.dsa.models.User;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 
 public class Test {
@@ -31,8 +32,8 @@ public class Test {
         Station station1 = new Station(1);
         Station station2 = new Station(2);
 
-        Station[] listAvailableStations = new Station[] {station0, station1, station2};
-        manager.setArrayStations(listAvailableStations);
+        Station[] arrayAvailableStations = new Station[] {station0, station1, station2};
+        manager.setArrayStations(arrayAvailableStations);
 
         manager.addUser(user1);
         manager.addUser(user2);
@@ -77,8 +78,17 @@ public class Test {
         System.out.println("The user has " + manager.getUserByID("Arnau").getListBikesUser().size() + " bikes.");
         System.out.println("---------------");
 
-        System.out.println("Arnau has: " + manager.bikesByUser(user1).size() + " bikes.");
+        System.out.println("Arnau has: " + manager.bikesByUser(user1.getIdUser()).size() + " bikes.");
         System.out.println("---------------");
+
+        manager.bikesByStationOrderByKms(station0);
+        System.out.println("---LIST OF ORDERED BIKES OF STATION 0---");
+        for (Bike bike : station0.getListBikes()){
+            System.out.println("Bike ID: " + bike.getIdBike());
+        }
+
+        System.out.println("---------------------");
+        System.out.println("Number of bikes of the selected station: " + manager.getStationById(0).getListBikes().size());
 
 
 

@@ -10,7 +10,8 @@ public class MyBikeImpl implements MyBike{
     Station [] arrayStations;
     List<Bike> listAllBikes = new LinkedList<Bike>();  /** List of all bikes in the system */
     int numStations; /** Parameter that determines the length of the list of all bikes array */
-    HashMap <String, User> usersHashMap = new HashMap<String, User>();
+    int numMaxStations; /** Determines the lenth of the array arrayStations */
+    HashMap <String, User> usersHashMap = new HashMap <String, User>();
 
     /**Singleton */
     private MyBikeImpl() {
@@ -44,19 +45,20 @@ public class MyBikeImpl implements MyBike{
         Collections.sort(station.getListBikes());
     }
 
-    public Bike getBike (Bike bike){
-        Bike bk = null;
+    /** Gets bike from ID */
+    public Bike getBike (int idBike){
+        Bike bike = null;
         for (Bike b : this.listAllBikes){
-            if (b.getIdBike() == bike.getIdBike()){
-                bk = b;
+            if (b.getIdBike() == idBike){
+                bike = b;
             }
         }
-        return bk;
+        return bike;
     }
 
     /** Returns the list of bikes of a user. */
-    public List<Bike> bikesByUser (User user){
-        return user.getListBikesUser();
+    public List<Bike> bikesByUser (String idUser){
+        return this.getUserByID(idUser).getListBikesUser();
     }
 
     public Station[] getArrayStations (){
@@ -65,11 +67,26 @@ public class MyBikeImpl implements MyBike{
 
     public void setArrayStations (Station[] arrayStations){
         this.arrayStations = arrayStations;
+        this.numMaxStations = arrayStations.length;
         this.numStations = 0;
     }
 
     public User getUserByID (String idUser){
         return this.usersHashMap.get(idUser);
+    }
+
+    public int getNumMaxStations (){
+        return this.numMaxStations;
+    }
+
+    public Station getStationById (int idStation){
+        Station station = null;
+        for (Station s : this.arrayStations){
+            if (s.getIdStation() == idStation){
+                station = s;
+            }
+        }
+        return station;
     }
 
 

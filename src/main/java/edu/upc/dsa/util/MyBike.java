@@ -12,11 +12,13 @@ public interface MyBike {
     void addStation (Station station);
     void addBike (Bike bike);
     void bikesByStationOrderByKms (Station station);
-    Bike getBike (Bike bike);
-    List<Bike> bikesByUser (User user);
+    Bike getBike (int idBike);
+    List<Bike> bikesByUser (String idUser);
     Station[] getArrayStations ();
     void setArrayStations (Station[] arrayStations);
 
     User getUserByID (String idUser);
+    int getNumMaxStations ();
+    Station getStationById (int idStation);
 
 }
