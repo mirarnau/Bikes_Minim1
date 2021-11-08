@@ -3,16 +3,14 @@ import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.Bike;
 import edu.upc.dsa.models.Station;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class MyBikeImpl implements MyBike{
     private static MyBikeImpl instance;
     Station [] arrayStations;
-    List<Bike> listAllBikes;  /** List of all bikes in the system */
+    List<Bike> listAllBikes = new LinkedList<Bike>();  /** List of all bikes in the system */
     int numStations; /** Parameter that determines the length of the list of all bikes array */
-    HashMap <String, User> usersHashMap;
+    HashMap <String, User> usersHashMap = new HashMap<String, User>();
 
     /**Singleton */
     private MyBikeImpl() {
@@ -24,12 +22,17 @@ public class MyBikeImpl implements MyBike{
         return instance;
     }
 
+    public HashMap<String, User> getAllUsers(){
+        return this.usersHashMap;
+    }
+
     public void addUser (User user){
         this.usersHashMap.put(user.getIdUser(), user);
     }
 
     public void addStation(Station station){
-        this.arrayStations[numStations] = station;
+        this.arrayStations[this.numStations] = station;
+        this.numStations++;
     }
 
     public void addBike (Bike bike){
@@ -39,10 +42,6 @@ public class MyBikeImpl implements MyBike{
     /** Orders the bikes in a given station by its kilometers.*/
     public void bikesByStationOrderByKms (Station station){
         Collections.sort(station.getListBikes());
-    }
-
-    public void getInfoUser(User user) {
-        this.usersHashMap.get(user.getIdUser());
     }
 
     public Bike getBike (Bike bike){
@@ -56,8 +55,21 @@ public class MyBikeImpl implements MyBike{
     }
 
     /** Returns the list of bikes of a user. */
-    public List<Bike> bikesByUser (User u){
-        return u.getListBikesUser();
+    public List<Bike> bikesByUser (User user){
+        return user.getListBikesUser();
+    }
+
+    public Station[] getArrayStations (){
+        return this.arrayStations;
+    }
+
+    public void setArrayStations (Station[] arrayStations){
+        this.arrayStations = arrayStations;
+        this.numStations = 0;
+    }
+
+    public User getUserByID (String idUser){
+        return this.usersHashMap.get(idUser);
     }
 
 

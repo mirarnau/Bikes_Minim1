@@ -1,10 +1,11 @@
 package edu.upc.dsa.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Station {
     private int idStation;
-    private List<Bike> listBikes;
+    private List<Bike> listBikes = new LinkedList<Bike>();
 
     public void setIdStation(int idStation) {
         this.idStation = idStation;
@@ -18,7 +19,7 @@ public class Station {
         return listBikes;
     }
 
-    public void addBikeStation(Bike bike){
+    public void addBikeToStation(Bike bike){
         this.listBikes.add(bike);
     }
 
@@ -26,10 +27,8 @@ public class Station {
         this.listBikes.remove(bike);
     }
 
-
-    public Station(int idStation, List<Bike> listBikes) {
+    public Station(int idStation) {
         this.idStation = idStation;
-        this.listBikes = listBikes;
     }
     public Station(){};
 }

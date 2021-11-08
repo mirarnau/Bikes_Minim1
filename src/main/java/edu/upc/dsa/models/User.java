@@ -1,10 +1,11 @@
 package edu.upc.dsa.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class User {
     private String idUser;
-    private List<Bike> listBikesUser;
+    private List<Bike> listBikesUser = new LinkedList<>();
 
     public void setIdUser(String idUser) {
         this.idUser = idUser;
@@ -13,7 +14,6 @@ public class User {
     public String getIdUser() {
         return idUser;
     }
-
 
     public User (String idUser){
         this.idUser = idUser;

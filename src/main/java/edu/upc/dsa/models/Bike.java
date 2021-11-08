@@ -2,9 +2,9 @@ package edu.upc.dsa.models;
 
 public class Bike implements Comparable<Bike> {
     private int idBike;
-    private int kilometers;
+    private double kilometers;
 
-    public void setKilometers(int kilometers) {
+    public void setKilometers(double kilometers) {
         this.kilometers = kilometers;
     }
 
@@ -16,17 +16,18 @@ public class Bike implements Comparable<Bike> {
         return idBike;
     }
 
-    public int getKilometers() {
+    public double getKilometers() {
         return kilometers;
     }
 
     public int compareTo (Bike b){
-        return Integer.compare(this.kilometers, b.getKilometers());
+        return Double.compare(this.kilometers, b.getKilometers());
     }
 
     /** Constructors */
-    public Bike(int idBike) {
+    public Bike(int idBike, double kilometers) {
         this.idBike = idBike;
+        this.kilometers = kilometers;
     }
 
     public Bike(){};
