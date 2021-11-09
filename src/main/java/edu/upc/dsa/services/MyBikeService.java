@@ -139,7 +139,7 @@ public class MyBikeService {
     @ApiOperation(value = "Get bikes from a station ordered by km.", notes = "Additional information.")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = Bike.class, responseContainer="List"),
-            @ApiResponse(code = 404, message= "ERRROR, no se han realizado seguimientos sobre esa persona todavía")
+            @ApiResponse(code = 404, message= "ERRROR")
     })
 
     @Path("/getBikesOrdered/{idStation}")
@@ -191,5 +191,6 @@ public class MyBikeService {
             return Response.status(404).build();
         }
     }
+
 
 }

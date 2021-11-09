@@ -20,5 +20,7 @@ public interface MyBike {
     User getUserByID (String idUser);
     int getNumMaxStations ();
     Station getStationById (int idStation);
+    void setMaxNumStations (int maxNumStations);
+    void cleanCache();
 
 }

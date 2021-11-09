@@ -1,16 +1,25 @@
-package edu.upc.dsa.util;
+package edu.upc.dsa;
 
 import edu.upc.dsa.models.Bike;
 import edu.upc.dsa.models.Station;
 import edu.upc.dsa.models.User;
+import edu.upc.dsa.util.MyBike;
+import edu.upc.dsa.util.MyBikeImpl;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.sql.SQLOutput;
-import java.util.HashMap;
+public class MyBikeTest {
+    MyBike manager = MyBikeImpl.getInstance();
+    @After
+    public void tearDown() {
+        manager.cleanCache();
+    }
 
-public class Test {
-    public static void main(String[] args) {
 
-        MyBike manager = MyBikeImpl.getInstance();
+    @Before
+    public void setUp() {
 
         //USERS
         User user1 = new User("Arnau");
@@ -35,15 +44,9 @@ public class Test {
         //Station[] arrayAvailableStations = new Station[] {station0, station1, station2};
         manager.setMaxNumStations(5);
         Station[] arrayAvailableStations = new Station[manager.getNumMaxStations()];
-        arrayAvailableStations[0] = station0;
-        arrayAvailableStations[1] = station1;
-        arrayAvailableStations[2] = station2;
         manager.setArrayStations(arrayAvailableStations);
 
-        manager.addUser(user1);
-        manager.addUser(user2);
-        manager.addUser(user3);
-        manager.addUser(user4);
+
 
         manager.addBike(bike0);
         manager.addBike(bike1);
@@ -70,45 +73,10 @@ public class Test {
         user2.takeBike(bike2);
         user3.takeBike(bike3);
         user3.takeBike(bike4);
+    }
 
-        /** Let's see the results */
-
-        for (Bike b : user1.getListBikesUser()){
-            System.out.println("LIST OF BIKES OF THE USER 1");
-            System.out.println("ID Byke: " + b.getIdBike());
-        }
-
-        System.out.println("---------------");
-        System.out.println("Should be Arnau: " + manager.getUserByID("Arnau").getIdUser());
-        System.out.println("The user has " + manager.getUserByID("Arnau").getListBikesUser().size() + " bikes.");
-        System.out.println("---------------");
-
-        System.out.println("Arnau has: " + manager.bikesByUser(user1.getIdUser()).size() + " bikes.");
-        System.out.println("---------------");
-
-        manager.bikesByStationOrderByKms(station0);
-        System.out.println("---LIST OF ORDERED BIKES OF STATION 0---");
-        for (Bike bike : station0.getListBikes()){
-            System.out.println("Bike ID: " + bike.getIdBike());
-        }
-
-        System.out.println("---------------------");
-        System.out.println("Number of bikes of the selected station: " + manager.getStationById(0).getListBikes().size());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Test
+    public void testAddUser(){
 
     }
 }

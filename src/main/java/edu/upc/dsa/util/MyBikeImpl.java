@@ -2,16 +2,19 @@ package edu.upc.dsa.util;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.Bike;
 import edu.upc.dsa.models.Station;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 public class MyBikeImpl implements MyBike{
     private static MyBikeImpl instance;
-    Station [] arrayStations;
     List<Bike> listAllBikes = new LinkedList<Bike>();  /** List of all bikes in the system */
+    Station [] arrayStations;
     int numStations; /** Parameter that determines the length of the list of all bikes array */
     int numMaxStations; /** Determines the lenth of the array arrayStations */
     HashMap <String, User> usersHashMap = new HashMap <String, User>();
+
+    final static Logger logger = Logger.getLogger(MyBikeImpl.class);
 
     /**Singleton */
     private MyBikeImpl() {
@@ -28,7 +31,9 @@ public class MyBikeImpl implements MyBike{
     }
 
     public void addUser (User user){
+        logger.info("New user to add: " + user);
         this.usersHashMap.put(user.getIdUser(), user);
+        logger.info("User added.");
     }
 
     public void addStation(Station station){
@@ -67,7 +72,6 @@ public class MyBikeImpl implements MyBike{
 
     public void setArrayStations (Station[] arrayStations){
         this.arrayStations = arrayStations;
-        this.numMaxStations = arrayStations.length;
         this.numStations = 0;
     }
 
@@ -87,6 +91,16 @@ public class MyBikeImpl implements MyBike{
             }
         }
         return station;
+    }
+
+    public void setMaxNumStations(int maxStations){
+        this.numMaxStations = maxStations;
+    }
+
+    public void cleanCache(){
+        this.arrayStations = null;
+        this.listAllBikes.clear();
+        this.usersHashMap.clear();
     }
 
 
